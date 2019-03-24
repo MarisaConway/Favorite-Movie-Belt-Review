@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Add Movie</title>
+</head>
+<body>
+    <p><a href="/displaymovie">Home</a> | <a href="/addmovie">New Movie</a> | <a href="/logout">Logout</a></p>
+    <form action="/processmovie" method="POST">
+        {% csrf_token %}
+        <fieldset><legend>New Movie</legend>
+            <input type="text" name="title" placeholder="Enter Movie Title">
+            <input type="text" name="year" placeholder="Enter 4 digit Year">
+            <input type="submit" value="Add Movie"><br><br>
+            <button><a href="/displaymovie">Go Back</a></button>
+        </fieldset>
+    </form>
+    {% if messages %}
+            {% for message in messages %}
+            <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+</body>
+</html>

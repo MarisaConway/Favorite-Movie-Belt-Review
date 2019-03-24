@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Success</title>
+        <style>
+                table {
+                  font-family: arial, sans-serif;
+                  border-collapse: collapse;
+                  width: 100%;
+                }
+                
+                td, th {
+                  border: 1px solid #dddddd;
+                  text-align: left;
+                  padding: 8px;
+                }
+                
+                tr:nth-child(even) {
+                  background-color: #dddddd;
+                }
+                </style>
+    </head>
+    <body>
+        <p><a href="/displaymovie">Home</a> | <a href="/addmovie">New Movie</a> | <a href="/logout">Logout</a></p>
+        <h1>Welcome {{user.fname}} {{user.lname}}!!!</h1>
+        <p>Your id is {{user.id}}</p>
+        <h1>Favorite Movies:</h1>
+        <table>
+                <tr>
+                  <th>Movie</th>
+                  <th>Year</th>
+                  <th>Date Added</th>
+                  <th>Added By</th>
+                  <th>Remove?</th>
+                </tr>
+                {% for i in movies %}
+                <tr>
+                  <td><a href="/showmovie/{{ i.id }}">{{ i.title }}</a></td>
+                  <td>{{ i.year }}</td>
+                  <td>{{ i.created_at }}</td>
+                  <td>{{ i.addedby.fname }} {{ i.addedby.lname }}</td>
+                  {% if i.addedby.id == request.session.userid %}
+                    <td><a href="/delete/{{i.id}}">Delete</a></td>
+                  {% else %}
+                    <td><a href="/unfavorite/{{i.id}}">unfavorite</a></td>
+                  {% endif %}
+                </tr>
+                {% endfor %}
+        </table>
+        <h1>NonFavorite Movies:</h1>
+        <table>
+                <tr>
+                  <th>Movie</th>
+                  <th>Year</th>
+                  <th>Date Added</th>
+                  <th>Added By</th>
+                  <th>Remove?</th>
+                </tr>
+                {% for i in unfavorites %}
+                <tr>
+                  <td><a href="/showmovie/{{ i.id }}">{{ i.title }}</a></td>
+                  <td>{{ i.year }}</td>
+                  <td>{{ i.created_at }}</td>
+                  <td>{{ i.addedby.fname }} {{ i.addedby.lname }}</td>
+                    <td><a href="/favorite/{{i.id}}">favorite</a></td>
+                </tr>
+                {% endfor %}
+        </table>
+    </body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Show Movie</title>
+</head>
+<body>
+    <p><a href="/displaymovie">Home</a> | <a href="/addmovie">New Movie</a> | <a href="/logout">Logout</a></p>
+    <p>Title  {{ movie.title }}</p>
+    <p>Year  {{ movie.year }}</p>
+    <p>Added By  {{ movie.addedby.fname }}</p><br>
+    <p>Users Who Like this Movie</p>
+    {% for i in favorites %}
+        <p>{{ i.fname }} {{ i.lname }}</p>
+    {% endfor %}
+</body>
+</html>
